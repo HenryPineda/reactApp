@@ -4,6 +4,9 @@ import './App.css';
 import Person from './Person/Person';
 import UserInput from './UserInput/UserInput';
 import UserOutput from './UserOutput/UserOutput';
+import Validation from './Validation/Validation';
+import Char from './Char/Char';
+
 
 class App extends Component {
 
@@ -11,9 +14,9 @@ class App extends Component {
 
     persons: [
 
-      { name: 'Henry', age: 31},
-      { name: 'Taty', age: 25},
-      { name: 'Stephanie', age: 4}
+      {id:'asdf1', name: 'Henry', age: 31},
+      {id:'asdf2', name: 'Taty', age: 25},
+      {id:'asdf3', name: 'Stephanie', age: 4}
 
 
     ],
@@ -23,7 +26,9 @@ class App extends Component {
       {username:'Richard Dog', alias:'DogSquard'}
     ],
 
-    showPersons: false
+    showPersons: false,
+
+    userInput: ''
 
   }
 
@@ -57,31 +62,39 @@ class App extends Component {
     })
   }
 
-  changedNameHandler = (event) => {
+  changedNameHandler = (event, id) => {
+
+    const personIndex = this.state.persons.findIndex(p => {
+
+      return p.id ===id;
+    });
+
+    const person = {...this.state.persons[personIndex]};
+
+    person.name = event.target.value;
+
+    const persons =[...this.state.persons];
+
+    persons[personIndex] = person
 
       this.setState({
 
-        persons: [
-
-          {name: 'Max', age: 28},
-          {name: event.target.value, age: 29},
-          {name: 'Stephanie', age:26 }
-        ]
-      })
+        persons: persons
+      });
 
   }
 
-  changeInputHangler =(event) => {
+  // changeInputHangler =(event) => {
 
-    this.setState({
+  //   this.setState({
 
-      users: [
+  //     users: [
 
-        {username: event.target.value, alias:this.state.users[0].alias}
+  //       {username: event.target.value, alias:this.state.users[0].alias}
 
-      ]
-    })
-  }
+  //     ]
+  //   })
+  // }
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
@@ -98,8 +111,38 @@ class App extends Component {
 
   }
 
+  outputlength = (event) => {
+
+    this.setState({
+
+      userInput: event.target.value
+
+
+    });
+
+  }
+
+  deleteCharHandler = (index) => {
+
+    const text = this.state.userInput.split('').map(char => {
+
+      return char
+    });
+
+    text.splice(index,1);
+
+    const newText = text.join('');
+
+    this.setState({userInput: newText});
+  }
+
 
   render() {
+
+    const charList = this.state.userInput.split('').map((char, index) => {
+
+      return <Char char={char} click={() =>this.deleteCharHandler(index)} key={index} />
+    });
 
     const style = {
 
@@ -135,7 +178,7 @@ class App extends Component {
 
             {this.state.persons.map((person, index) => {
 
-              return <Person name={person.name} age = {person.age} click={() => this.deletePersonHandler(index)} />
+              return <Person name={person.name} age = {person.age} click={() => this.deletePersonHandler(index)} key={person.id} changed={(event) =>this.changedNameHandler(event, person.id)} >This is a children of person!</Person>
             })}
         </div>
         
@@ -194,6 +237,17 @@ class App extends Component {
         } */}
 
         {persons}
+
+        <hr />
+
+        <input type="text" onChange={(event) => this.outputlength(event)} value={this.state.userInput} />
+        <p>{this.state.userInput}</p>
+
+        <p>{this.state.userInput.length}</p>
+
+        <Validation inputLength={this.state.userInput.length}  />
+
+        {charList}
       </div>
 
     )
