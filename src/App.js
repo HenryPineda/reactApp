@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 //import logo from './logo.svg';
 import './App.css';
-import Radium, { StyleRoot } from 'radium';
+// import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 import UserInput from './UserInput/UserInput';
 import UserOutput from './UserOutput/UserOutput';
@@ -213,7 +213,7 @@ class App extends Component {
 
     return (
 
-    <StyleRoot >
+    // <StyleRoot >
 
       <div className="App">
         {/* <header className="App-header">
@@ -278,7 +278,7 @@ class App extends Component {
         {charList}
       </div>
 
-    </StyleRoot>
+    // </StyleRoot>
 
     )
 
@@ -288,4 +288,4 @@ class App extends Component {
 
 }
 
-export default Radium(App);
+export default App;
