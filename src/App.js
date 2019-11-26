@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 //import logo from './logo.svg';
 import './App.css';
+import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 import UserInput from './UserInput/UserInput';
 import UserOutput from './UserOutput/UserOutput';
@@ -146,11 +147,18 @@ class App extends Component {
 
     const style = {
 
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color:'white',
       font:'inherti',
       border:'1px solid blue',
       padding:'8px',
-      cursor:'pointer'
+      borderRadius:'5px',
+      cursor:'pointer',
+      ':hover':{
+
+        backgroundColor:'lightgreen',
+        color:'black'
+      }
     }
 
     let persons = null;
@@ -183,9 +191,29 @@ class App extends Component {
         </div>
         
         )
+      style.backgroundColor ='red';
+      style[':hover'] ={
+
+        backgroundColor:'salmon',
+        color:'black'
+      }
+    }
+
+    let classes = [];
+
+    if(this.state.persons.length <= 2){
+
+      classes.push('red');
+    }
+
+    if(this.state.persons.length <=1){
+
+      classes.push('bold');
     }
 
     return (
+
+    <StyleRoot >
 
       <div className="App">
         {/* <header className="App-header">
@@ -203,7 +231,7 @@ class App extends Component {
           </a>
         </header> */}
 
-        <h1>Hi, I am a react app!</h1>
+        <p className={classes.join(' ')}>Hi, I am a react app!</p>
         <button
           style = {style}
           // onClick= {this.switchNameHandler.bind(this, 'Henry Pineda')}>Switch name
@@ -250,6 +278,8 @@ class App extends Component {
         {charList}
       </div>
 
+    </StyleRoot>
+
     )
 
 
@@ -258,4 +288,4 @@ class App extends Component {
 
 }
 
-export default App;
+export default Radium(App);
