@@ -7,25 +7,6 @@ import UserInput from './UserInput/UserInput';
 import UserOutput from './UserOutput/UserOutput';
 import Validation from './Validation/Validation';
 import Char from './Char/Char';
-import styled from 'styled-components';
-
-const StyleButton = styled.button`
-
-  background-color:${props => props.alt ? 'orange' : 'brown'};
-  color:${props => props.alt ? 'black' : 'white'};
-  font:inherti;
-  border:1px solid blue;
-  padding:8px;
-  border-radius:5px;
-  cursor:pointer;
-  &:hover {
-
-    background-color:${props => props.alt ? 'black' : 'pink'};
-    color:${props => props.alt ? 'white' : 'black'};
-  }
-
-
-`;
 
 
 class App extends Component {
@@ -210,14 +191,12 @@ class App extends Component {
         </div>
         
         )
-      // style.backgroundColor ='red';
-      // style[':hover'] ={
+      style.backgroundColor ='red';
+      style[':hover'] ={
 
-      //   backgroundColor:'salmon',
-      //   color:'black'
-      // }
-
-      
+        backgroundColor:'salmon',
+        color:'black'
+      }
     }
 
     let classes = [];
@@ -253,16 +232,12 @@ class App extends Component {
         </header> */}
 
         <p className={classes.join(' ')}>Hi, I am a react app!</p>
-        <button className="button"
-          //style = {style}
+        <button
+          style = {style}
           // onClick= {this.switchNameHandler.bind(this, 'Henry Pineda')}>Switch name
           onClick = {this.togglePersonsHandler}
         >Show people
         </button>
-
-        {/* <StyleButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
-          Show people
-        </StyleButton> */}
           
         {/* {
 
