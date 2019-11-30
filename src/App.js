@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 //import logo from './logo.svg';
-import './App.css';
+import classes from './App.module.css';
 // import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 import UserInput from './UserInput/UserInput';
@@ -163,6 +163,8 @@ class App extends Component {
 
     let persons = null;
 
+    let btnClass = '';
+
     if(this.state.showPersons){
 
       persons = (
@@ -191,31 +193,33 @@ class App extends Component {
         </div>
         
         )
-      style.backgroundColor ='red';
-      style[':hover'] ={
+      // style.backgroundColor ='red';
+      // style[':hover'] ={
 
-        backgroundColor:'salmon',
-        color:'black'
-      }
+      //   backgroundColor:'salmon',
+      //   color:'black'
+      // }
+
+      btnClass = classes.Red;
     }
 
-    let classes = [];
+    let classes2 = [];
 
     if(this.state.persons.length <= 2){
 
-      classes.push('red');
+      classes2.push(classes.red);
     }
 
     if(this.state.persons.length <=1){
 
-      classes.push('bold');
+      classes2.push(classes.bold);
     }
 
     return (
 
     // <StyleRoot >
 
-      <div className="App">
+      <div className={classes.App}>
         {/* <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
@@ -231,10 +235,11 @@ class App extends Component {
           </a>
         </header> */}
 
-        <p className={classes.join(' ')}>Hi, I am a react app!</p>
+        <p className={classes2.join(' ')}>Hi, I am a react app!</p>
         <button
-          style = {style}
+          //style = {style}
           // onClick= {this.switchNameHandler.bind(this, 'Henry Pineda')}>Switch name
+          className={btnClass}
           onClick = {this.togglePersonsHandler}
         >Show people
         </button>

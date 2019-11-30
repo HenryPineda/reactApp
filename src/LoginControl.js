@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import './App.css';
+import classes from './App.module.css';
 import LoginButton from './LoginButton/LoginButton';
 import LogoutButton from './LogoutButton/LogoutButton';
 
