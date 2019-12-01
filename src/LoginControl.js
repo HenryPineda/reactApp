@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
-import classes from './App.module.css';
-import LoginButton from './LoginButton/LoginButton';
-import LogoutButton from './LogoutButton/LogoutButton';
+import classes from './containers/App.module.css';
+import LoginButton from './components/LoginButton/LoginButton';
+import LogoutButton from './components/LogoutButton/LogoutButton';
 
 
 

@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 //import logo from './logo.svg';
 import classes from './App.module.css';
 // import Radium, { StyleRoot } from 'radium';
-import Person from './Person/Person';
-import UserInput from './UserInput/UserInput';
-import UserOutput from './UserOutput/UserOutput';
-import Validation from './Validation/Validation';
-import Char from './Char/Char';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
+// import UserInput from '../components/UserInput/UserInput';
+// import UserOutput from '../components/UserOutput/UserOutput';
+import Validation from '../components/Validation/Validation';
+import Char from '../components/Char/Char';
+import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 
 
 class App extends Component {
@@ -163,7 +165,7 @@ class App extends Component {
 
     let persons = null;
 
-    let btnClass = '';
+    
 
     if(this.state.showPersons){
 
@@ -186,10 +188,20 @@ class App extends Component {
             <button onClick={this.changeUser.bind(this, 'Ricardo', 'Perro')}>Change user</button>
             <UserOutput userName={this.state.users[0].username} userAlias ={this.state.users[0].alias} /> */}
 
-            {this.state.persons.map((person, index) => {
+            {/* {this.state.persons.map((person, index) => {
 
-              return <Person name={person.name} age = {person.age} click={() => this.deletePersonHandler(index)} key={person.id} changed={(event) =>this.changedNameHandler(event, person.id)} >This is a children of person!</Person>
-            })}
+                // <ErrorBoundary></ErrorBoundary>
+                return <Person key={person.id} name={person.name} age = {person.age} click={() => this.deletePersonHandler(index)}  changed={(event) =>this.changedNameHandler(event, person.id)} >This is a children of person!</Person>
+                      
+            })} */}
+
+            <Persons 
+              persons={this.state.persons}
+              clicked={this.deletePersonHandler}
+              changed={this.changedNameHandler}
+            >
+
+            </Persons>
         </div>
         
         )
@@ -200,20 +212,20 @@ class App extends Component {
       //   color:'black'
       // }
 
-      btnClass = classes.Red;
+      // btnClass = classes.Red;
     }
 
-    let classes2 = [];
+    // let classes2 = [];
 
-    if(this.state.persons.length <= 2){
+    // if(this.state.persons.length <= 2){
 
-      classes2.push(classes.red);
-    }
+    //   classes2.push(classes.red);
+    // }
 
-    if(this.state.persons.length <=1){
+    // if(this.state.persons.length <=1){
 
-      classes2.push(classes.bold);
-    }
+    //   classes2.push(classes.bold);
+    // }
 
     return (
 
@@ -235,14 +247,22 @@ class App extends Component {
           </a>
         </header> */}
 
-        <p className={classes2.join(' ')}>Hi, I am a react app!</p>
+        {/* <p className={classes2.join(' ')}>Hi, I am a react app!</p>
         <button
           //style = {style}
           // onClick= {this.switchNameHandler.bind(this, 'Henry Pineda')}>Switch name
           className={btnClass}
           onClick = {this.togglePersonsHandler}
         >Show people
-        </button>
+        </button> */}
+
+        <Cockpit
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler}
+          showsPersons={this.state.showPersons}
+        >
+            
+        </Cockpit>
           
         {/* {
 
