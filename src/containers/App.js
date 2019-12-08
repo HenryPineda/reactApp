@@ -7,6 +7,7 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import Validation from '../components/Validation/Validation';
 import Char from '../components/Char/Char';
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
+import WithClass from '../hoc/WithClass';
 
 
 class App extends Component {
@@ -205,7 +206,9 @@ class App extends Component {
 
     return (
 
-      <div className={classes.App}>
+      // <div className={classes.App}>
+
+      <WithClass className={classes.App} >
 
         <button onClick={ this.removeCockpitHandler}>
           
@@ -240,7 +243,8 @@ class App extends Component {
 
         {charList}
 
-      </div>
+      </WithClass>
+      // </div>
 
     )
 
