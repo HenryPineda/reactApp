@@ -11,6 +11,15 @@ import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
 
+  constructor(props){
+
+    super(props);
+    console.log('[App.js ] constructor');
+
+
+  }
+
+
   state= {
 
     persons: [
@@ -29,8 +38,34 @@ class App extends Component {
 
     showPersons: false,
 
-    userInput: ''
+    userInput: '',
 
+    showCockpit: false
+
+  }
+
+
+  static getDerivedStateFromProps(props, state){
+
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+
+  }
+
+  componentDidMount(){
+
+    console.log('[App.js] componentDidMount');
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
+
+  componentDidUpdate(){
+
+    console.log('[App.js] componentDidUpdate');
   }
 
   changeUser =(newName, newAlias) => {
@@ -92,10 +127,18 @@ class App extends Component {
     
   }
 
+  removeCockpitHandler =() => {
+
+    const doesRemove = this.state.showCockpit;
+
+    this.setState({showCockpit: !doesRemove});
+
+  }
+
   deletePersonHandler= (personsIndex) => {
     //const persons = this.state.persons;
 
-    
+
     const persons = [...this.state.persons];
     persons.splice(personsIndex,1);
 
@@ -131,6 +174,8 @@ class App extends Component {
 
   render() {
 
+    console.log('[App.js] render');
+
     const charList = this.state.userInput.split('').map((char, index) => {
 
       return <Char char={char} click={() =>this.deleteCharHandler(index)} key={index} />
@@ -162,13 +207,25 @@ class App extends Component {
 
       <div className={classes.App}>
 
+        <button onClick={ this.removeCockpitHandler}>
+          
+          { this.state.showCockpit ? 'Remove ' : 'Show '
+
+          }
+          Cockpit!
+        
+        
+        </button>
+        {this.state.showCockpit ?
         <Cockpit
-          persons={this.state.persons}
+          title={this.props.appTitle}
+          personsLength={this.state.persons.length}
           clicked={this.togglePersonsHandler}
           showsPersons={this.state.showPersons}
         >
             
         </Cockpit>
+        : null}
 
         {persons}
 

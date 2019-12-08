@@ -5,7 +5,7 @@ import App from './containers/App';
 import LoginControl from './LoginControl';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App appTitle="Person Manager" />, document.getElementById('root'));
 
 
 //ReactDOM.render(<LoginControl />, document.getElementById('root1'));
