@@ -7,7 +7,7 @@ import React from 'react';
 
 const aux = props => (
 
-<div className={props.className}>{props.children}</div>
+<div className={props.className} title={props.title}>{props.children}</div>
 
 ); 
 export default aux;

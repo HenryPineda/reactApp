@@ -7,7 +7,8 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import Validation from '../components/Validation/Validation';
 import Char from '../components/Char/Char';
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
-import WithClass from '../hoc/WithClass';
+import withClass from '../hoc/withClass';
+import Aux from '../hoc/Auxiliary';
 
 
 class App extends Component {
@@ -41,7 +42,11 @@ class App extends Component {
 
     userInput: '',
 
-    showCockpit: false
+    showCockpit: false,
+
+    changeCounter: 0,
+
+    authenticated: false
 
   }
 
@@ -114,9 +119,14 @@ class App extends Component {
 
     persons[personIndex] = person
 
-      this.setState({
+      this.setState((prevState, props)=>{
 
-        persons: persons
+        return {
+          persons: persons,
+
+          changeCounter: prevState.changeCounter +1
+
+        }
       });
 
   }
@@ -172,6 +182,15 @@ class App extends Component {
     this.setState({userInput: newText});
   }
 
+  loginHandler = () => {
+
+    this.setState({
+
+      authenticated: true
+
+    });
+  }
+
 
   render() {
 
@@ -195,6 +214,7 @@ class App extends Component {
               persons={this.state.persons}
               clicked={this.deletePersonHandler}
               changed={this.changedNameHandler}
+              isAuthenticated={this.state.authenticated}
             >
 
             </Persons>
@@ -208,8 +228,8 @@ class App extends Component {
 
       // <div className={classes.App}>
 
-      <WithClass className={classes.App} >
-
+      // <WithClass className={classes.App} >
+      <Aux title={this.props.appTitle}>
         <button onClick={ this.removeCockpitHandler}>
           
           { this.state.showCockpit ? 'Remove ' : 'Show '
@@ -225,6 +245,7 @@ class App extends Component {
           personsLength={this.state.persons.length}
           clicked={this.togglePersonsHandler}
           showsPersons={this.state.showPersons}
+          login={this.loginHandler}
         >
             
         </Cockpit>
@@ -243,7 +264,8 @@ class App extends Component {
 
         {charList}
 
-      </WithClass>
+      </Aux>
+      //</WithClass>
       // </div>
 
     )
@@ -254,4 +276,4 @@ class App extends Component {
 
 }
 
-export default App;
+export default withClass(App, classes.App);

@@ -1,10 +1,18 @@
 
 import React from 'react';
 
-const withClass = props => (
+const withClass = (WrappedComponent, className) => {
 
-<div className={props.className}>{props.children}</div>
+    return props => (
+    
+        <div className={className}>
+            
+            <WrappedComponent {...props}></WrappedComponent>
+            
+        </div>
 
-);
+    );
+
+};
 
 export default withClass;

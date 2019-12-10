@@ -1,9 +1,12 @@
 
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 import classes from './Cockpit.module.css';
 
 const Cockpit = (props) => {
+
+    const toggleBtnRef = useRef(null);
+    //toggleBtnRef.current.click();
 
     useEffect(() => {
 
@@ -13,6 +16,8 @@ const Cockpit = (props) => {
 
             alert('Saved data to cloud!');
         }, 1000);
+
+        toggleBtnRef.current.click();
 
         return () => {
 
@@ -64,11 +69,14 @@ const Cockpit = (props) => {
             <button
                 //style = {style}
                 // onClick= {this.switchNameHandler.bind(this, 'Henry Pineda')}>Switch name
+                ref={toggleBtnRef}
                 className={btnClass}
                 onClick = {props.clicked}
             >
                 Show people
             </button>
+
+            <button onClick={props.login} >Log in</button>
 
         </div>
     );
